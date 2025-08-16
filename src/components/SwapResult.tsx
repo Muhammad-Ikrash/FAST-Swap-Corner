@@ -84,7 +84,7 @@ FAST Swap Corner
           
           <div className="bg-blue-50 rounded-lg p-4 mb-6">
             <p className="text-sm text-blue-700">
-              📧 Both students have been notified via email. Contact them directly to coordinate the swap.
+              📧 Contact them directly to coordinate the swap.
             </p>
           </div>
           
