@@ -1,31 +1,33 @@
-import React, { useState } from 'react';
-import { User } from 'lucide-react';
-import { validateRollNumber } from '../utils/validation';
+import React, { useState } from "react";
+import { User } from "lucide-react";
+import { validateRollNumber } from "../utils/validation";
 
 interface RollNumberInputProps {
   onValidRollNumber: (rollNumber: string) => void;
 }
 
-export const RollNumberInput: React.FC<RollNumberInputProps> = ({ onValidRollNumber }) => {
-  const [rollNumber, setRollNumber] = useState('');
-  const [error, setError] = useState('');
+export const RollNumberInput: React.FC<RollNumberInputProps> = ({
+  onValidRollNumber,
+}) => {
+  const [rollNumber, setRollNumber] = useState("");
+  const [error, setError] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!validateRollNumber(rollNumber)) {
-      setError('Invalid format. Use XXL-YYYY (e.g., 23L-0632)');
+      setError("Invalid format. Use XXL-YYYY (e.g., 23L-0632)");
       return;
     }
 
-    setError('');
+    setError("");
     onValidRollNumber(rollNumber);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.toUpperCase();
     setRollNumber(value);
-    if (error) setError('');
+    if (error) setError("");
   };
 
   return (
@@ -35,13 +37,18 @@ export const RollNumberInput: React.FC<RollNumberInputProps> = ({ onValidRollNum
           <div className="mx-auto w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4">
             <User className="w-8 h-8 text-blue-600" />
           </div>
-          <h1 className="text-2xl font-bold text-gray-900 mb-2">Course Section Swap</h1>
+          <h1 className="text-2xl font-bold text-gray-900 mb-2">
+            Course Section Swap
+          </h1>
           <p className="text-gray-600">Enter your roll number to get started</p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label htmlFor="rollNumber" className="block text-sm font-medium text-gray-700 mb-2">
+            <label
+              htmlFor="rollNumber"
+              className="block text-sm font-medium text-gray-700 mb-2"
+            >
               Roll Number
             </label>
             <input
@@ -49,9 +56,9 @@ export const RollNumberInput: React.FC<RollNumberInputProps> = ({ onValidRollNum
               id="rollNumber"
               value={rollNumber}
               onChange={handleChange}
-              placeholder="23L-0632"
+              placeholder="(e.g) 23L-0632, 23L-0684"
               className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 ${
-                error ? 'border-red-300 bg-red-50' : 'border-gray-300'
+                error ? "border-red-300 bg-red-50" : "border-gray-300"
               }`}
               maxLength={8}
             />
@@ -74,6 +81,13 @@ export const RollNumberInput: React.FC<RollNumberInputProps> = ({ onValidRollNum
         <div className="mt-6 text-center">
           <p className="text-xs text-gray-500">
             Roll number format: XXL-YYYY (e.g., 23L-0632)
+          </p>
+          <p className="text-m text-red-600">
+            Once a match is found, the entry of both students will be removed to
+            prevent duplicate matches.
+          </p>
+          <p className="text-m text-red-600">
+            The matches are based on FCFS basis.
           </p>
         </div>
       </div>
