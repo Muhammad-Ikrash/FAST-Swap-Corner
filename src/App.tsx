@@ -12,6 +12,7 @@ function App() {
   const [rollNumber, setRollNumber] = useState('');
   const [swapMatch, setSwapMatch] = useState<SwapMatch | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [courseInfo, setCourseInfo] = useState<{current: string, target: string} | null>(null);
 
   const handleValidRollNumber = (roll: string) => {
     setRollNumber(roll);
@@ -25,6 +26,7 @@ function App() {
     department: string
   ) => {
     setIsLoading(true);
+    setCourseInfo({ current, target });
 
     const request: SwapRequest = {
       roll_number: rollNumber,
@@ -95,6 +97,8 @@ function App() {
           rollNumber={rollNumber}
           matchFound={swapMatch?.success || false}
           counterpartRoll={swapMatch?.counterpart_roll}
+          currentCourse={courseInfo?.current}
+          targetCourse={courseInfo?.target}
           onStartOver={handleStartOver}
         />
       );
