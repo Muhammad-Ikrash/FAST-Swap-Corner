@@ -25,8 +25,8 @@ Hello,
 
 You've been matched for a course section swap!
 
-Your current course: ${currentCourse || 'N/A'}
-Their current course: ${targetCourse || 'N/A'}
+My current course: ${currentCourse || 'N/A'}
+Your current course: ${targetCourse || 'N/A'}
 
 Please reply to coordinate the swap.
 
