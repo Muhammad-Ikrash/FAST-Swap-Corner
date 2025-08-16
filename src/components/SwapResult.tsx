@@ -19,6 +19,21 @@ export const SwapResult: React.FC<SwapResultProps> = ({
   targetCourse,
   onStartOver 
 }) => {
+  // Compose a detailed email body including course details
+  const emailBody = `
+Hello,
+
+You've been matched for a course section swap!
+
+Your current course: ${currentCourse || 'N/A'}
+Their current course: ${targetCourse || 'N/A'}
+
+Please reply to coordinate the swap.
+
+Thanks,
+FAST Swap Corner
+  `;
+
   if (matchFound && counterpartRoll) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-green-50 to-emerald-100 flex items-center justify-center p-4">
@@ -57,7 +72,7 @@ export const SwapResult: React.FC<SwapResultProps> = ({
            <div className="flex items-center justify-center gap-2">
              <Mail className="w-4 h-4 text-blue-600" />
              <a 
-               href={`https://mail.google.com/mail/?view=cm&fs=1&to=${rollNumberToEmail(counterpartRoll)}&su=${encodeURIComponent(`Course Section Swap - ${rollNumber} & ${counterpartRoll}`)}&body=${encodeURIComponent(`Hi,\n\nI found your contact through the Course Section Swap system. We have been matched for a course swap.\n\nMy roll number: ${rollNumber}\nYour roll number: ${counterpartRoll}\n\nMy current course: ${currentCourse || 'N/A'}\nYour current course: ${targetCourse || 'N/A'}\n\nLet's coordinate our section swap.\n\nBest regards`)}`}
+               href={`https://mail.google.com/mail/?view=cm&fs=1&to=${rollNumberToEmail(counterpartRoll)}&su=${encodeURIComponent(`Course Section Swap - ${rollNumber} & ${counterpartRoll}`)}&body=${encodeURIComponent(emailBody)}`}
                target="_blank"
                rel="noopener noreferrer"
                className="text-blue-600 hover:text-blue-800 font-medium underline transition-colors duration-200"
